@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Sweetheart Switch</title>
+  <style>
+    body { font-family: Times-new-roman, sans-serif; max-width: 720px; margin: 40px auto; }
+    .card { padding: 18px; border: 1px solid #ddd; border-radius: 14px; }
+    button { padding: 10px 14px; border-radius: 10px; border: 1px solid #ccc; cursor: pointer; }
+    .flag { margin-top: 14px; padding: 10px; border-radius: 10px; background: #f7f7f7; display:none; }
+    .hint { opacity: .7; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>💝 Sweetheart Switch</h2>
+    <p id="status">Cupid says: Not approved yet 💔</p>
+    <button id="refresh">Try Again</button>
+
+    <div id="flag" class="flag">FLAG{valentines_localstorage_switch}</div>
+
+    <div class="hint">
+      Hint: “Cupid remembers things in your browser…”
+    </div>
+  </div>
+
+  <script>
+    // Set default (first visit)
+    if (localStorage.getItem("sweetheartApproved") === null) {
+      localStorage.setItem("sweetheartApproved", "false");
+    }
+
+    function render() {
+      const ok = localStorage.getItem("sweetheartApproved") === "true";
+      document.getElementById("status").textContent = ok
+        ? "Cupid says: Approved 💖"
+        : "Cupid says: Not approved yet 💔";
+      document.getElementById("flag").style.display = ok ? "block" : "none";
+    }
+
+    document.getElementById("refresh").addEventListener("click", render);
+    render();
+  </script>
+</body>
+</html>
