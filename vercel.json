@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/easy", "destination": "/easy/" },
+    { "source": "/medium", "destination": "/api/medium" },
+    { "source": "/hard", "destination": "/api/hard" }
+  ]
+}
