@@ -2,30 +2,97 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Sweetheart Switch</title>
+  <title>💝 Sweetheart Switch</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    body { font-family: Times-new-roman, sans-serif; max-width: 720px; margin: 40px auto; }
-    .card { padding: 18px; border: 1px solid #ddd; border-radius: 14px; }
-    button { padding: 10px 14px; border-radius: 10px; border: 1px solid #ccc; cursor: pointer; }
-    .flag { margin-top: 14px; padding: 10px; border-radius: 10px; background: #f7f7f7; display:none; }
-    .hint { opacity: .7; margin-top: 12px; }
+    :root{
+      --bg:#0b0f1a; --card:#0f1830; --pink:#ff3ea5; --cyan:#31e7ff; --text:#e7ecff; --muted:#9aa7c7;
+    }
+    body{
+      margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+      font-family: ui-sans-serif, system-ui, Arial;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(255,62,165,.22), transparent 55%),
+                  radial-gradient(900px 600px at 85% 40%, rgba(49,231,255,.18), transparent 55%),
+                  linear-gradient(180deg, var(--bg), #050711);
+      color:var(--text);
+    }
+    .wrap{width:min(820px,92vw); padding:24px;}
+    .brand{letter-spacing:.12em; text-transform:uppercase; font-size:12px; color:var(--muted);}
+    .card{
+      margin-top:10px;
+      background: linear-gradient(180deg, rgba(15,24,48,.92), rgba(10,14,30,.92));
+      border: 1px solid rgba(49,231,255,.22);
+      border-radius:18px;
+      padding:20px 18px;
+      box-shadow: 0 0 0 1px rgba(255,62,165,.12), 0 20px 60px rgba(0,0,0,.55);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(500px 200px at 20% 10%, rgba(255,62,165,.18), transparent 60%),
+                  radial-gradient(400px 220px at 85% 80%, rgba(49,231,255,.16), transparent 60%);
+      pointer-events:none;
+    }
+    h1{margin:0 0 8px; font-size:28px;}
+    p{margin:10px 0; color:var(--muted); line-height:1.5;}
+    .row{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:14px;}
+    button{
+      background: linear-gradient(90deg, rgba(255,62,165,.95), rgba(49,231,255,.85));
+      color:#071022; border:0; border-radius:14px;
+      padding:10px 14px; font-weight:700; cursor:pointer;
+      box-shadow: 0 10px 30px rgba(255,62,165,.18);
+    }
+    button:active{transform:translateY(1px);}
+    .pill{
+      border:1px solid rgba(49,231,255,.25);
+      border-radius:999px;
+      padding:8px 12px;
+      color:var(--text);
+      background: rgba(10,14,30,.55);
+    }
+    .flag{
+      display:none;
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,62,165,.35);
+      background: rgba(255,62,165,.08);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      color: #fff;
+    }
+    .hint{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px dashed rgba(49,231,255,.28);
+      color:var(--muted);
+      background: rgba(49,231,255,.06);
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>💝 Sweetheart Switch</h2>
-    <p id="status">Cupid says: Not approved yet 💔</p>
-    <button id="refresh">Try Again</button>
+  <div class="wrap">
+    <div class="brand">Affection Overflow • Web • Easy</div>
+    <div class="card">
+      <h1>💝 Sweetheart Switch</h1>
+      <div class="pill" id="status">Cupid says: Not approved yet 💔</div>
 
-    <div id="flag" class="flag">FLAG{flipped_4_u}</div>
+      <div class="row">
+        <button id="refresh">Try Again</button>
+        <div class="pill">Signal: <span id="sig">LOW</span></div>
+      </div>
 
-    <div class="hint">
-      Hint: “Cupid remembers things in your browser…”
+      <div id="flag" class="flag">flag{flipped_4_u}</div>
+
+      <div class="hint">
+        Hint: Cupid remembers decisions <b>inside your browser</b>.
+      </div>
     </div>
   </div>
 
   <script>
-    // Set default (first visit)
     if (localStorage.getItem("sweetheartApproved") === null) {
       localStorage.setItem("sweetheartApproved", "false");
     }
@@ -35,6 +102,7 @@
       document.getElementById("status").textContent = ok
         ? "Cupid says: Approved 💖"
         : "Cupid says: Not approved yet 💔";
+      document.getElementById("sig").textContent = ok ? "HIGH" : "LOW";
       document.getElementById("flag").style.display = ok ? "block" : "none";
     }
 
