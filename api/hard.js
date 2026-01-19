@@ -77,7 +77,7 @@ module.exports = (req, res) => {
       </div>
 
       <div class="hint">
-        Hint: Try a template-looking token like <code>{{7*7}}</code>… and maybe <code>{{secret}}</code>.
+        Hint: Try a template-looking token like <code>{{7*7}}</code>… or maybe the secret is something else.
       </div>
 
       <div class="filler">
