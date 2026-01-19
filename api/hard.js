@@ -49,15 +49,24 @@ module.exports = (req, res) => {
       padding:18px 16px;
       background:rgba(255,62,165,.08);
       max-width:min(720px,92vw);
-      animation: shake .12s linear infinite提醒;
+      animation: shake 0.08s linear infinite提醒;
+      transform-origin: center;
+      will-change: transform;
     }
     @keyframes shake{
-      0%{transform:translate(0,0)}
-      25%{transform:translate(2px,-1px)}
-      50%{transform:translate(-2px,1px)}
-      75%{transform:translate(1px,2px)}
-      100%{transform:translate(0,0)}
-    }
+      @keyframes shake {
+      0%   { transform: translate(0, 0); }
+      10%  { transform: translate(-3px, -2px); }
+      20%  { transform: translate(3px, 2px); }
+      30%  { transform: translate(-3px, 2px); }
+      40%  { transform: translate(3px, -2px); }
+      50%  { transform: translate(-2px, 2px); }
+      60%  { transform: translate(2px, -2px); }
+      70%  { transform: translate(-2px, -1px); }
+      80%  { transform: translate(2px, 1px); }
+      90%  { transform: translate(-1px, 2px); }
+      100% { transform: translate(0, 0); }
+}
   </style>
 </head>
 <body>
@@ -107,7 +116,7 @@ module.exports = (req, res) => {
         fired = true;
         const g = document.getElementById("glitch");
         g.style.display = "flex";
-        setTimeout(() => { g.style.display = "none"; }, 900);
+        setTimeout(() => { g.style.display = "none"; }, 2800);
       }
     });
   </script>
