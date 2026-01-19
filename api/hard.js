@@ -50,7 +50,10 @@ module.exports = (req, res) => {
     "      <div class='preview'><b>Preview:</b><div>" + escapeHtml(rendered) + "</div></div>" +
     "      <div class='hint'>Hint: Some render engines interpret special {{ ... }} tokens. What happens if input is not treated as plain text?</div>" +
     "      <div class='filler'>Keep scrolling... the city never sleeps.<br/>(Totally normal. Definitely not cursed.)</div>" +
-    "    </div>" +
+"      <div style='margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;'>" +
+"        <a href='/' style='text-decoration:none; border-radius:14px; padding:10px 12px; font-weight:700; color:#071022; background:linear-gradient(90deg, rgba(255,62,165,.95), rgba(49,231,255,.85)); box-shadow:0 10px 30px rgba(255,62,165,.18);'>Return to Hub</a>" +
+"      </div>" +
+
     "  </div>" +
     "  <div id='glitch' class='glitch'>" +
     "    <div class='box' id='glitchBox'>" +

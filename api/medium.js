@@ -66,9 +66,6 @@ module.exports = (req, res) => {
         </div>
       `}
 
-      <div class="hint">
-        Hint: What happens if you change the number in the URL?
-      </div>
 <div class="hint">
   Hint: What happens if you change the number in the URL?
 </div>
