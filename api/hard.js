@@ -97,7 +97,7 @@ module.exports = (req, res) => {
   </div>
 
   <div id="glitch" class="glitch">
-    <div class="box">
+    <div class="box" id="glitchBox">
       <div style="font-size:18px;margin-bottom:8px;color:#fff;">⚠ SIGNAL CORRUPTION DETECTED</div>
       <div>THE POISON PEN IS WATCHING YOU.</div>
       <div style="opacity:.75;margin-top:10px;">…okay jk. Keep hacking 💖</div>
@@ -105,21 +105,49 @@ module.exports = (req, res) => {
   </div>
 
   <script>
-    // Harmless jumpscare: show once when user scrolls near bottom.
-    let fired = false;
-    function nearBottom() {
-      return (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 40);
+  let fired = false;
+  let shaker = null;
+
+  function nearBottom() {
+    return (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 40);
+  }
+
+  function startShake() {
+    const box = document.getElementById("glitchBox");
+    if (!box) return;
+
+    // clear any existing shake
+    stopShake();
+
+    shaker = setInterval(() => {
+      const x = Math.floor(Math.random() * 9) - 4; // -4..4
+      const y = Math.floor(Math.random() * 9) - 4; // -4..4
+      box.style.transform = `translate(${x}px, ${y}px)`;
+    }, 40); // shake speed
+  }
+
+  function stopShake() {
+    const box = document.getElementById("glitchBox");
+    if (shaker) clearInterval(shaker);
+    shaker = null;
+    if (box) box.style.transform = "translate(0,0)";
+  }
+
+  window.addEventListener("scroll", () => {
+    if (fired) return;
+    if (nearBottom()) {
+      fired = true;
+      const g = document.getElementById("glitch");
+      g.style.display = "flex";
+      startShake();
+
+      setTimeout(() => {
+        stopShake();
+        g.style.display = "none";
+      }, 2800); // how long it stays visible
     }
-    window.addEventListener("scroll", () => {
-      if (fired) return;
-      if (nearBottom()) {
-        fired = true;
-        const g = document.getElementById("glitch");
-        g.style.display = "flex";
-        setTimeout(() => { g.style.display = "none"; }, 2800);
-      }
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
   `);
